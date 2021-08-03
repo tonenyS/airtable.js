@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="airtable.browser.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/style.css">
+    <title>Terra Expertise Store Table</title>
+    <link rel="icon" href="images/i-con.png" type="image/x-icon">
+
+
+
+
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand">TERRA EXPERTISE</a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+                <form class="d-flex">
+                    <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                      </ul> -->
+                </form>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <section class="content">
+        <div class="container-xxxl">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Purchase Requisition (PR) Table
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tablePr" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr class="info">
+                                        <th width="120">รหัส PR</th>
+                                        <th width="250">โครงการ</th>
+                                        <th width="200">รายละเอียด</th>
+                                        <th>จัดส่ง ณ</th>
+                                        <th width="150">สถานะ PR</th>
+                                        <th width="150">ผู้ขออนุมัติจัดซื้อ</th>
+                                        <th width="9">แก้ไข</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- <div class="modal-dialog modal-xl" id=myDiv>..Tone Tone Tone..</div> -->
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button> -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="myDiv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modifyModal" id="modalLabel">แก้ไขข้อมูล</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="javascript:location.reload()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รหัส PR</label>
+                                    <input type="text" class="form-control form-control-sm" id="pr_id"
+                                        value="รายชื่อโครงการ" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>โครงการ</label>
+                                    <select type="text" class="form-control form-control-sm" id="input1" value="input1">
+                                        <option value="รัชดา-อโศก">รัชดา-อโศก</option>
+                                        <option value="บางกรวย-ไทยน้อย">บางกรวย-ไทยน้อย</option>
+                                        <option value="สุขุมวิท 39">สุขุมวิท-39</option>
+                                        <option value="รถไฟฟ้าสายสีส้ม">รถไฟฟ้า-สายสีส้ม</option>
+                                        <option value="รถไฟฟ้าสายชมพู">รถไฟฟ้า-สายสีชมพู</option>
+                                        <!-- <option value="รถไฟฟ้าสายสีส้ม">รถไฟฟ้า-สายสีส้ม</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>วันที่เปิด PR</label>
+                                    <input type="date" class="form-control form-control-sm" id="input2"
+                                        value="ํYY/MM/DD">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>สถานที่จัดส่ง</label>
+                                    <input type="text" class="form-control form-control-sm" id="input3" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>ติดต่อคุณ</label>
+                                    <input type="text" class="form-control form-control-sm" id="input4" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>เบอร์โทรผู้รับของ</label>
+                                    <input type="tel" class="form-control form-control-sm" id="input5" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>วันที่จัดส่ง</label>
+                                    <input type="date" class="form-control form-control-sm" id="input6"
+                                        value="yyyy-mm-dd">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>เวลาที่จัดส่ง</label>
+                                    <input type="time" class="form-control form-control-sm" id="input34" value=""
+                                        placeholder="HH:mm">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>ผู้ขออนุมัติจัดซื้อ</label>
+                                    <input type="text" class="form-control form-control-sm" id="input31" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label>จัดส่ง ณ</label>
+                                    <input type="text" class="form-control form-control-sm" id="address" value=""
+                                        disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>สถานะ PR</label>
+                                    <input type="text" class="form-control form-control-sm" id="pr_status" value=""
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 1</label>
+                                    <input type="text" class="form-control form-control-sm" id="input7" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 1</label>
+                                    <input type="number" class="form-control form-control-sm" id="input8" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 1</label>
+                                    <input type="number" class="form-control form-control-sm" id="input9" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 2</label>
+                                    <input type="text" class="form-control form-control-sm" id="input10" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 2</label>
+                                    <input type="number" class="form-control form-control-sm" id="input11" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 2</label>
+                                    <input type="number" class="form-control form-control-sm" id="input12" value="">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 3</label>
+                                    <input type="text" class="form-control form-control-sm" id="input13" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 3</label>
+                                    <input type="number" class="form-control form-control-sm" id="input14" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 3</label>
+                                    <input type="number" class="form-control form-control-sm" id="input15" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 4</label>
+                                    <input type="text" class="form-control form-control-sm" id="input16" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 4</label>
+                                    <input type="number" class="form-control form-control-sm" id="input17" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 4</label>
+                                    <input type="number" class="form-control form-control-sm" id="input18" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 5</label>
+                                    <input type="text" class="form-control form-control-sm" id="input19" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 5</label>
+                                    <input type="number" class="form-control form-control-sm" id="input20" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 5</label>
+                                    <input type="number" class="form-control form-control-sm" id="input21" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 6</label>
+                                    <input type="text" class="form-control form-control-sm" id="input22" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 6</label>
+                                    <input type="number" class="form-control form-control-sm" id="input23" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 6</label>
+                                    <input type="number" class="form-control form-control-sm" id="input24" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 7</label>
+                                    <input type="text" class="form-control form-control-sm" id="input25" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 7</label>
+                                    <input type="number" class="form-control form-control-sm" id="input26" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 7</label>
+                                    <input type="number" class="form-control form-control-sm" id="input27" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>รายการที่ 8</label>
+                                    <input type="text" class="form-control form-control-sm" id="input28" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 8</label>
+                                    <input type="number" class="form-control form-control-sm" id="input29" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>จำนวน รายการที่ 8</label>
+                                    <input type="number" class="form-control form-control-sm" id="input30" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="close_modal" class="btn btn-secondary" data-bs-dismiss="modal"
+                            onclick="javascript:window.location.reload()">ปิด</button>
+                        <button type="button" id="save_modal" class="btn btn-primary"
+                            onclick="update()">บันทึกข้อมูล</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <footer class="footer-48201">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 pr-md-5">
+                        <a href="#" class="footer-site-logo d-block mb-4">Colorlib</a>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+                            quasi perferendis ratione perspiciatis accusantium.
+                        </p>
+                    </div>
+                    <div class="col-md">
+                        <ul class="list-unstyled nav-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md">
+                        <ul class="list-unstyled nav-links">
+                            <li><a href="#">Clients</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Career</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Journal</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md">
+                        <ul class="list-unstyled nav-links">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms &amp; Conditions</a></li>
+                            <li><a href="#">Partners</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md text-md-center">
+                        <ul class="social list-unstyled">
+                            <li>
+                                <a href="#"><span class="icon-instagram"></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="icon-twitter"></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="icon-facebook"></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="icon-pinterest"></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="icon-dribbble"></span></a>
+                            </li>
+                        </ul>
+                        <p class=""><a href="#" class="btn btn-tertiary">Contact Us</a></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="copyright mt-5 pt-5">
+                            <p><small>&copy; 2019-2020 All Rights Reserved.</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer> -->
+</body>
+
+
+<script src="app.js"></script>
+
+</html>
